@@ -16,12 +16,6 @@
 
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
-
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
                             </div>
                         </div>
 
@@ -30,12 +24,6 @@
 
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control" name="password" required>
-
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
                             </div>
                         </div>
 
@@ -70,6 +58,21 @@
 @section('contenido')
     <section id="form"><!--form-->
         <div class="container">
+            <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                    @if (count($errors)>0)
+                        <ul>
+                        @foreach ($errors->all() as $error)
+                            <li><span class="help-block">
+                                    <strong>{{$error}}</strong>
+                                </span>
+                            </li>
+                        @endforeach
+                        </ul>
+                    @endif
+                </div>
+            </div>
+            
             <div class="row">
                 <div class="col-sm-4 col-sm-offset-1">
                     <div class="login-form"><!--login form-->
@@ -77,23 +80,11 @@
                         <form class="form-horizontal" method="POST" action="{{ route('login') }}">
                         {{ csrf_field() }}
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                                <input id="email" type="email" name="email" value="{{ old('email') }}" placeholder="E-Mail Address" required autofocus>
-
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
+                                <input id="email" type="email" name="email" placeholder="E-Mail Address" required autofocus>
                         </div>
 
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                                 <input id="password" type="password" name="password" placeholder="Password" required>
-
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
                         </div>
                             <span>
                                 <input type="checkbox" class="checkbox"> 
@@ -114,33 +105,15 @@
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                                 <input id="name" type="text" name="name" placeholder="Name" value="{{ old('name') }}" required autofocus>
-
-                                @if ($errors->has('name'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('name') }}</strong>
-                                    </span>
-                                @endif
                         </div>
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                                 <input id="email" type="email" name="email" placeholder="E-Mail Address" value="{{ old('email') }}" required>
-
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
                         </div>
 
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
 
                                 <input id="password" type="password" name="password" placeholder="Password" required>
-
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
                         </div>
 
                         <div class="form-group">
