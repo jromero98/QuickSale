@@ -16,12 +16,12 @@
       <h3>Crear Negocio</h3>
     </div>
   </div>
-  {!!Form::open(array('url'=>'negocios','method'=>'POST','autocomplete'=>'off','files' => true))!!}
+  {!!Form::model($negocio,['method'=>'PATCH','route'=>['editarnegocio.update',$negocio->nombre_negocio],'files'=>true])!!}
     {{Form::token()}}   
   <div class="row">
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-center">
       <div class="form-group">
-        <img id="imgSalida" height="200px" width="200px">
+        <img id="imgSalida" height="200px" src="../imagenes/negocio/{{$negocio->imagen}}" width="200px">
       </div>
             <label class="btn btn-primary">
                 Cargar Imagen <input type="file" style="display: none;" id="imagen" name="imagen" accept="image/*">
@@ -34,24 +34,24 @@
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
       <div class="form-group">
         <label for="nombre">Nombre del Negocio</label>
-        <input type="text" required value="{{old('nombre')}}" name="nombre" class="form-control" placeholder="Nombre...">
+        <input type="text" required value="{{$negocio->nombre_negocio}}" name="nombre" class="form-control" placeholder="Nombre...">
       </div>
     </div>
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
       <div class="form-group">
         <label for="direccion">Direccion</label>
-        <input type="text" value="{{old('direccion')}}" name="direccion" class="form-control" placeholder="Direccion...">
+        <input type="text" value="" name="direccion" class="form-control" placeholder="Direccion...">
       </div>
     </div>
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
       <div class="form-group">
         <label for="telefono">Telefono</label>
-        <input type="number" required value="{{old('telefono')}}" name="telefono" class="form-control" placeholder="Telefono...">
+        <input type="number" required value="{{$negocio->telefono}}" name="telefono" class="form-control" placeholder="Telefono...">
       </div>
     </div>
   </div>
       <div class="form-group">
-        <button class="btn btn-success" name="guardar" type="submit">Guardar</button>
+        <button class="btn btn-success" type="submit">Guardar</button>
         <a href="{{ route('perfil') }}" class="btn btn-danger">Cancelar</a>
       </div>
   <div id="myModal" class="modal">

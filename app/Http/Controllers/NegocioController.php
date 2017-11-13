@@ -56,17 +56,44 @@ class NegocioController extends Controller
         return Redirect::to('perfil');
 
     }
+    public function update (Request $request,$id)
+    {
+        $negocio=Negocio::findOrFail($id);
+        $negocio->nombre_negocio=$request->get('nombre');
+        $negocio->id_user=Auth::user()->id;
+        $negocio->telefono=$request->get('telefono');
+        //$negocio->direccion=$request->get('direccion');
+        if (Input::hasFile('imagen')){
+            $file=Input::file('imagen');
+            $file->move(public_path().'/imagenes/negocio/',$file->getClientOriginalName());
+            $negocio->imagen=$file->getClientOriginalName();
+        }
+        $negocio->update();
+        return Redirect::to('perfil');
+
+    }
     public function edit($id)
     {
     	$categorias=DB::table('sub_categoria')->select('*')->get();
     	$negocio=Negocio::findOrFail($id);
     	$productos=DB::table('producto as p')
             ->join('sub_categoria as s','s.nombre_sub','=','p.sub_categoria')
-            ->join('negocio as n','s.nombre_sub','=','n.nombre_negocio')
-            ->select('*')
+            ->join('negocio as n','s.negocio','=','n.nombre_negocio')
+            ->select('nombre_producto','sub_categoria','descripcion','precio','p.imagen','id_producto')
             ->where('n.nombre_negocio','=',$id)
             ->get();
         return view("perfil.edit",compact('id','negocio','productos','categorias'));
+    }
+    public function editnegocio($id)
+    {
+        $negocio=DB::table('negocio')->select('*')->where('nombre_negocio','=',$id)->first();
+        return view("perfil.editnegocio",compact('negocio'));
+    }
+    public function destroy($id)
+    {
+        $negocio=Negocio::findOrFail($id);
+        $negocio->delete();
+        return Redirect::to('perfil');
     }
     public function searchGirls(Request $request)
     {

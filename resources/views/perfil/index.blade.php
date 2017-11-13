@@ -8,7 +8,7 @@
         <div class="row">
           <div class="col-md-4" style="position:static;">
             <div class="profile-card" style="background: orange;">
-              <img src="images\home\gallery3.jpg" alt="user" class="profile-photo" />
+              <img src="images\home\product2.jpg" alt="user" class="profile-photo" />
               <h5><a href="timeline.html" class="text-white">{{ Auth::user()->name }}</a></h5>
             </div>
             <ul class="nav-news-feed">
