@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('contenido')
-<div class="col-sm-9 padding-right">
+<div class="col-sm-9 padding-right" id="limpiar">
                     <div class="features_items"><!--features_items-->
                         <h2 class="title text-center">Features Items</h2>
                         <div class="col-sm-4">
@@ -179,6 +179,7 @@
                                 <div class="tab-pane fade active in" id="{{$categoria->nombre_sub}}" >
                                     @foreach($productos as $producto)
                                         @if($producto->sub_categoria==$categoria->nombre_sub)
+                                            @include('carrito.modal')
                                             <div class="col-sm-3">
                                                 <div class="product-image-wrapper">
                                                     <div class="single-products">
@@ -187,8 +188,16 @@
                                                             <h2>${{$producto->precio}}</h2>
                                                             <p>{{$producto->nombre_producto}}</p>
                                                             <p>{{$producto->descripcion}}</p>
-                                                            <a href="{{URL::action('ProductoController@edit',$producto->id_producto)}}"><button class="btn btn-info">Editar</button></a>
-                                                            <a href="" data-target="#modal-delete-{{$producto->id_producto}}" data-toggle="modal"><button class="btn btn-danger">Eliminar</button></a>
+                                                            @if(Auth::user())
+                                                                @if(Auth::user()->id==$producto->id_user)
+                                                                    <a href="{{URL::action('ProductoController@edit',$producto->id_producto)}}"><button class="btn btn-info">Editar</button></a>
+                                                                    <a href="" data-target="#modal-delete-{{$producto->id_producto}}" data-toggle="modal"><button class="btn btn-danger">Eliminar</button></a>
+                                                                @else
+                                                                    <a href="" data-target="#modal-delete-{{$producto->id_producto}}" data-toggle="modal" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                                                @endif
+                                                            @else
+                                                                    <a href="" data-target="#modal-delete-{{$producto->id_producto}}" data-toggle="modal" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                                            @endif
                                                         </div>
                                                         
                                                     </div>

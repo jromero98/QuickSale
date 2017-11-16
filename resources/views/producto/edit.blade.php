@@ -4,7 +4,7 @@
 @section ('contenido')
 	<div class="container">
 		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-			<h3>Editar {{$producto->nombre_producto}} de {{$producto->nombre_negocio}}</h3>
+			<h3 style="text-align: center;">Editar {{$producto->nombre_producto}} de {{$producto->nombre_negocio}}</h3>
 		</div>
 	</div>
 	@include('producto.subcategoriamodal')

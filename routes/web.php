@@ -34,4 +34,10 @@ Route::group(['middleware' => 'auth'], function (){
 	Route::post('/producto', 'ProductoController@store')->name('producto');
 	Route::post('/subcategoria', 'SubCategoriaController@store')->name('subcategoria');
 	Route::get('/subcategoria/index', 'SubCategoriaController@index')->name('subcategoria');
+	Route::get('/carrito', 'CarritoController@index')->name('carrito');
+	Route::post('/carrito/{id}', 'CarritoController@store')->name('addcarrito');
+	Route::resource('dcarrito', 'CarritoController',
+	                ['only' => ['destroy']]);
+
+	Route::get('/producto/index/{id}','BuscarController@index'); 
 });

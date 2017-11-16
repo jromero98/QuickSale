@@ -28,7 +28,7 @@ class HomeController extends Controller
         $productos=DB::table('producto as p')
             ->join('sub_categoria as s','s.nombre_sub','=','p.sub_categoria')
             ->join('negocio as n','s.negocio','=','n.nombre_negocio')
-            ->select('nombre_producto','sub_categoria','descripcion','precio','p.imagen','id_producto')
+            ->select('nombre_producto','sub_categoria','descripcion','precio','p.imagen','id_producto','id_user')
             ->get();
         return view('home',compact('categorias','productos'));
     }

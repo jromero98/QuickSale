@@ -98,7 +98,7 @@
 				<div class="row">
 					<div class="col-sm-4">
 						<div class="logo pull-left">
-							<a href="index.html"><img src="{{asset('images/home/logo.png')}}" alt="" /></a>
+							<a href="/"><img src="{{asset('images/home/logo.png')}}" alt="" /></a>
 						</div>
 						<div class="btn-group pull-right">
 							<div class="btn-group">
@@ -130,8 +130,14 @@
 								<li><a href="{{ route('perfil') }}"><i class="fa fa-user"></i> Account</a></li>
 								<li><a href=""><i class="fa fa-star"></i> Wishlist</a></li>
 								<li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
-								<li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a></li>
-								<li><a href="{{ route('login') }}" class="active"><i class="fa fa-lock"></i> Login</a></li>
+								<li><a href="{{ route('carrito') }}"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+								@if(!Auth::user())
+				                    <li><a href="{{ route('login') }}"><i class="fa fa-lock"></i> Login</a></li>
+				                @else
+				                    <li><a href="{{ route('logout') }}"
+	                                        onclick="event.preventDefault();
+	                                                 document.getElementById('logout-form').submit();"><i class="fa fa-unlock"></i> Logout</a></li>
+				                @endif
 							</ul>
 						</div>
 					</div>
@@ -159,8 +165,14 @@
                                         <li><a href="shop.html">Products</a></li>
 										<li><a href="product-details.html">Product Details</a></li> 
 										<li><a href="checkout.html">Checkout</a></li> 
-										<li><a href="cart.html">Cart</a></li> 
-										<li><a href="login.html">Login</a></li> 
+										<li><a href="{{ route('carrito') }}">Cart</a></li> 
+										@if(!Auth::user())
+						                    <li><a href="{{ route('login') }}"><i class="fa fa-lock"></i> Login</a></li>
+						                @else
+						                    <li><a href="{{ route('logout') }}"
+			                                        onclick="event.preventDefault();
+			                                                 document.getElementById('logout-form').submit();"><i class="fa fa-unlock"></i> Logout</a></li>
+						                @endif
                                     </ul>
                                 </li> 
 								<li class="dropdown"><a href="#">Blog<i class="fa fa-angle-down"></i></a>
@@ -176,7 +188,7 @@
 					</div>
 					<div class="col-sm-3">
 						<div class="search_box pull-right">
-							<input type="text" placeholder="Search"/>
+							<input type="text" id="search" name="search" placeholder="Search"/>
 						</div>
 					</div>
 				</div>
@@ -194,7 +206,7 @@
 				<div class="row">
 					<div class="col-sm-2">
 						<div class="companyinfo">
-							<h2><span>e</span>-shopper</h2>
+							<h2><span>Quick</span>Sale</h2>
 							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,sed do eiusmod tempor</p>
 						</div>
 					</div>
@@ -353,5 +365,6 @@
 	<script src="{{asset('js/price-range.js')}}"></script>
     <script src="{{asset('js/jquery.prettyPhoto.js')}}"></script>
     <script src="{{asset('js/main.js')}}"></script>
+    <script src="{{asset('js/buscar.js')}}"></script>
 </body>
 </html>

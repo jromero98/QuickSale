@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('contenido')
-	
+	<?php  ?>
     <link rel="stylesheet" href="css/style.css" />
      <div id="page-contents">
       <div class="container">

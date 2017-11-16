@@ -8,7 +8,7 @@ class Ventas extends Model
 {
     protected $table='ventas';
 
-    //protected $primaryKey='nombre_sub';
+    protected $primaryKey='id';
 
     public $timestamps=false;
 
@@ -17,7 +17,8 @@ class Ventas extends Model
     'producto',
     'cantidad',
     'precio',
-    'comprador'
+    'comprador',
+    'imagen'
     ];
 
     protected $guarded =[
